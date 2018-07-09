@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.ucsf.glv.webapp.connection.Jdbc;
-import org.ucsf.glv.webapp.util.ConvertResultSetToJson;
+import org.ucsf.glv.webapp.util.ConvertData;
 
 public class ReviewAndVerifyTransactionsBusiness {
 
@@ -14,11 +14,11 @@ public class ReviewAndVerifyTransactionsBusiness {
         PreparedStatement prepareStatement;
 
         if (reconGroupTitle.equals("Total")) {
-            sql = "select ReconItemCd,ReconGroupTitle,ReconItemTitle,NotVerified,Pending,Complete, AutoComplete,PriorNotVerified,PriorPending,NotVerifiedCount,PendingCount,CompleteCount,AutoCompleteCount,PriorNotVerifiedCount,PriorPendingCount,AmtM01x,AmtM02x,AmtM03x,AmtM04x,AmtM05x,AmtM06x,AmtM07x,AmtM08x,AmtM09x,AmtM10x,AmtM11x,AmtM12x,AmtTotx from SOM_AA_TransactionSummary where SessionUserid=? order by Sort1 asc, Sort2 asc";
+            sql = "SELECT ReconItemCd, ReconGroupTitle, ReconItemTitle, NotVerified, Pending,Complete, AutoComplete, PriorNotVerified, PriorPending, NotVerifiedCount, PendingCount, CompleteCount, AutoCompleteCount, PriorNotVerifiedCount, PriorPendingCount, AmtM01x, AmtM02x, AmtM03x, AmtM04x, AmtM05x, AmtM06x, AmtM07x, AmtM08x, AmtM09x, AmtM10x, AmtM11x, AmtM12x, AmtTotx FROM SOM_AA_TransactionSummary WHERE SessionUserid=? ORDER BY Sort1 asc, Sort2 ASC";
             prepareStatement = Jdbc.getPrepareStatement(sql);
             prepareStatement.setString(1, sessionUserId);
         } else {
-            sql = "select ReconItemCd,ReconGroupTitle,ReconItemTitle,NotVerified,Pending,Complete, AutoComplete,PriorNotVerified,PriorPending,NotVerifiedCount,PendingCount,CompleteCount,AutoCompleteCount,PriorNotVerifiedCount,PriorPendingCount,AmtM01x,AmtM02x,AmtM03x,AmtM04x,AmtM05x,AmtM06x,AmtM07x,AmtM08x,AmtM09x,AmtM10x,AmtM11x,AmtM12x,AmtTotx from SOM_AA_TransactionSummary where SessionUserid=? and ReconGroupTitle=? order by Sort1 asc, Sort2 asc";
+            sql = "SELECT ReconItemCd, ReconGroupTitle, ReconItemTitle, NotVerified, Pending,Complete, AutoComplete, PriorNotVerified, PriorPending, NotVerifiedCount, PendingCount, CompleteCount, AutoCompleteCount, PriorNotVerifiedCount, PriorPendingCount, AmtM01x, AmtM02x, AmtM03x, AmtM04x, AmtM05x, AmtM06x, AmtM07x, AmtM08x, AmtM09x, AmtM10x, AmtM11x, AmtM12x, AmtTotx FROM SOM_AA_TransactionSummary WHERE SessionUserid=? AND ReconGroupTitle=? ORDER BY Sort1 ASC, Sort2 ASC";
             prepareStatement = Jdbc.getPrepareStatement(sql);
             prepareStatement.setString(1, sessionUserId);
             prepareStatement.setString(2, reconGroupTitle);
@@ -26,7 +26,7 @@ public class ReviewAndVerifyTransactionsBusiness {
 
         ResultSet rs = prepareStatement.executeQuery();
 
-        String json = ConvertResultSetToJson.convert(rs);
+        String json = ConvertData.convertResultSetToJson(rs);
 
         rs.close();
         prepareStatement.close();
