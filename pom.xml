@@ -45,11 +45,19 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.bundles/jaxrs-ri -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.glassfish.jersey.bundles</groupId>
             <artifactId>jaxrs-ri</artifactId>
             <version>${jaxrs-ri.version}</version>
+        </dependency> -->
+
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey-container-servlet.version}</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
